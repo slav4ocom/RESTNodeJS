@@ -1,4 +1,4 @@
-# RESTNodeJS REST API written in Node.js
+# RESTNodeJS - REST API written in Node.js
 
 this api provides data in json for weather forecast in Bulgaria.
 
