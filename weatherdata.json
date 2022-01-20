@@ -1,0 +1,58 @@
+[
+    {
+        "sofia": {
+            "temp": 2,
+            "weather": "Cloudy",
+            "feels": -1,
+            "wind": 10
+        }
+    },
+    {
+        "tarnovo": {
+            "temp": 2,
+            "weather": "Cloudy",
+            "feels": -1,
+            "wind": 10
+        }
+    },
+    {
+        "varna": {
+            "temp": 2,
+            "weather": "Cloudy",
+            "feels": -1,
+            "wind": 10
+        }
+    },
+    {
+        "ruse": {
+            "temp": 2,
+            "weather": "Cloudy",
+            "feels": -1,
+            "wind": 10
+        }
+    },
+    {
+        "pleven": {
+            "temp": 2,
+            "weather": "Cloudy",
+            "feels": -1,
+            "wind": 10
+        }
+    },
+    {
+        "burgas": {
+            "temp": 2,
+            "weather": "Cloudy",
+            "feels": -1,
+            "wind": 10
+        }
+    },
+    {
+        "plovdiv": {
+            "temp": 2,
+            "weather": "Cloudy",
+            "feels": -1,
+            "wind": 10
+        }
+    }
+]
