@@ -31,8 +31,6 @@ function SaveCityData(cityName) {
                 console.log(err);
             else {
                 console.log("File written successfully\n");
-                //console.log("The written has the following contents:");
-                //console.log(fs.readFileSync("movies.txt", "utf8"));
             }
         });
 
@@ -56,7 +54,6 @@ function GetCityData(cityName) {
 
         res.on('close', () => {
             console.log('Retrieved all data');
-            //console.log(JSON.parse(cityData));
             SaveCityData(cityName);
         });
     });
@@ -82,55 +79,25 @@ app.get('/showdata/:city', function (req, res) {
     var result = "this is weather data";
     console.log(cityName);
 
-    //res.setHeader('Content-Type', 'text/html; charset=UTF-8');
-
     fs.readFile("data/" + cityName + '.json', 'utf8', function (err, data) {
-
-        // Display the file content
-        //console.log(data);
         result = data;
+        res.header("Access-Control-Allow-Origin", "*");
         res.end(result);
-        //fs.close();
     });
 
 
     console.log('readFile called');
 });
 
-//
-//
-//    app.get('/weather', function (req, res) {
-//        fs.readFile("weatherdata.csv", 'utf8', function (err, data) {
-//            forecast = new Object();
-//            forecast.cities = new Array;
-//
-//            var rows = data.split("\r\n");
-//
-//            cities = new Array;
-//            rows.forEach(row => {
-//                //console.log("row");
-//                //console.log(row);
-//                var cityElements = row.split(",");
-//                var city = new Object;
-//
-//                city.name = cityElements[0];
-//                city.temp = cityElements[1];
-//                city.icon = cityElements[2];
-//                city.feels = cityElements[3];
-//                city.wind = cityElements[4];
-//
-//                forecast.cities.push(city);
-//            });
-//
-//            //console.log(cities);
-//            var result = JSON.stringify(forecast);
-//            console.log(result);
-//            res.header("Access-Control-Allow-Origin", "*");
-//            res.header("Cache-Control", "no-cache");
-//            res.end(result);
-//        });
-//    });
+function SetCityData() {
+    const cities = ['sofia', 'plovdiv', 'varna', 'bourgas', 'rousse', 'pleven', 'tarnovo'];
+    var timeout = 0;
+    cities.forEach(element => {
+        setTimeout(GetCityData, timeout += 1000, element);
+    });
+}
 
+setInterval(SetCityData, 5 * 60 * 1000);
 
 var server = app.listen(8080, function () {
     var host = server.address().address
