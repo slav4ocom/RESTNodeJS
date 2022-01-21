@@ -2,22 +2,12 @@
 var express = require('express');
 var app = express();
 var fs = require("fs");
-
-
-//const city = {
-//    name: "tarnovo",
-//    temp: -2,
-//    feels: -4,
-//    wind: 10,
-//    weather: "Mostly cloudy"
-//}
-
-var cities = new Array;
-
+const { runInNewContext } = require('vm');
 
 app.get('/weather', function (req, res) {
     fs.readFile("weatherdata.csv", 'utf8', function (err, data) {
-        //var row = "tarnovo,-2,Mostly cloudy,-1,10".split(",");
+        forecast = new Object();
+        forecast.cities = new Array;
 
         var rows = data.split("\r\n");
 
@@ -27,29 +17,22 @@ app.get('/weather', function (req, res) {
             //console.log(row);
             var cityElements = row.split(",");
             var city = new Object;
-            
+
             city.name = cityElements[0];
             city.temp = cityElements[1];
-            city.weather = cityElements[2];
+            city.icon = cityElements[2];
             city.feels = cityElements[3];
             city.wind = cityElements[4];
-            
-            cities.push(city);
+
+            forecast.cities.push(city);
         });
 
         //console.log(cities);
-        var result = JSON.stringify(cities);
+        var result = JSON.stringify(forecast);
         console.log(result);
-        res.end(result);
-    });
-})
-
-app.get('/weatherforecast', function (req, res) {
-    fs.readFile("weatherdata.json", 'utf8', function (err, data) {
-        //console.log(data);
-        console.log('get weather from XMLHttpRequest');
         res.header("Access-Control-Allow-Origin", "*");
-        res.end(data);
+        res.header("Cache-Control", "no-cache");
+        res.end(result);
     });
 })
 
