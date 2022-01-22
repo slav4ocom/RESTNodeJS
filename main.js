@@ -8,15 +8,21 @@ const https = require('https');
 const { resourceUsage } = require('process');
 const { Console } = require('console');
 
-const apiKey = "12ab99a374msh86888c209888997p1c34b3jsn3c4215e0734c";
+var apiKey;
+var options;
 
-const options = {
-    method: 'GET',
-    headers: {
-        'Accept': 'application/json',
-        'X-RapidAPI-Key': apiKey
-    }
-};
+fs.readFile('apikey.txt', 'utf8', function (err, data) {
+    apiKey = data;
+    console.log(data);
+    options = {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'X-RapidAPI-Key': apiKey
+        }
+    };
+});
+
 
 
 function SaveCityData(cityName) {
@@ -90,7 +96,7 @@ app.get('/showdata/:city', function (req, res) {
 });
 
 function SetCityData() {
-    const cities = ['sofia', 'plovdiv', 'varna', 'bourgas', 'rousse', 'pleven', 'tarnovo'];
+    const cities = ['sofia,bg', 'plovdiv,bg', 'varna,bg', 'bourgas,bg', 'rousse,bg', 'pleven,bg', 'tarnovo,bg'];
     var timeout = 0;
     cities.forEach(element => {
         setTimeout(GetCityData, timeout += 1000, element);
